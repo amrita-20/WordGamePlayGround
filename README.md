@@ -1,21 +1,5 @@
 # INFO6250 Project1 - Server-side Dynamic Site
 
-**Due Wed Oct 18, 11:59pm PT**
-
-## Submission Instructions
-
-- Start from the up-to-date main branch (git checkout main; git pull origin main)
-- Create a feature branch named 'project1' (git checkout -b project1)
-- Create a package.json and necessary files to complete the work described in this README
-  - You can add/modify any files except as limited below
-    - In particular: Do not load external JS, no client-side/browser JS, do not change words.js
-  - Remember that all work you submit must be based on my code or represent your writing
-    - Do not start from someone else's code - write it all yourself
-    - ChatGPT and other LLMs do not count as writing it yourself
-- Add, commit, and push the branch to github
-- Create a PR to merge to main
-- Be sure to include the reviewer(s).
-
 ## Goals
 
 - You will build a web-based word guessing game
@@ -26,7 +10,8 @@
 
 ## Functional Requirements
 
-For all the below: 
+For all the below:
+
 - A "game" means one specific secret word is chosen and the user takes multiple turns making guesses
   - A "new game" means a new secret word is selected, the number of guesses made is reset to 0, and the list of possible words is reset to the full list
     - Statistics about previous games may be preserved
@@ -41,14 +26,17 @@ For all the below:
 ### Home Page
 
 When the User loads the page (path: `/`)
+
 - the site will determine if the user is logged in (based on `sid` session cookie)
 
 - If the user is not logged in:
+
   - the page will display a login form instead of the below content
   - the login form will ask for a username but will NOT ask for a password
   - the login form will POST to `/login` (see "The Login Flow")
 
 - A logged in user will see:
+
   - A list of words the secret word could be
   - A list of any previously guessed words and how many letters each matched (see "Making a Guess")
   - A count of how many valid guesses they have made so far this game (essentially, a score a player wants to keep low)
@@ -59,7 +47,7 @@ When the User loads the page (path: `/`)
   - An option to logout
   - An option to start a new game
   - Notice: All of the above is true even if they reload the page. The user stays logged in and the displayed information does not change
-  - You can choose how to display the above information.  You might combine the list of available words and the list of guessed words and matches, or you might have them as separate lists, for example. What matters is:
+  - You can choose how to display the above information. You might combine the list of available words and the list of guessed words and matches, or you might have them as separate lists, for example. What matters is:
     - The information is all present
     - The information is understandable to an average user
 
@@ -69,20 +57,23 @@ When the User loads the page (path: `/`)
 ### Making a Guess
 
 A guess will be sent as a POST to the path `/guess`
+
 - The server will check for a valid session id
   - If there is not a valid session id, the page will display a message and a login form
     - Hint: an invalid session id could come from manually changing your cookie or restarting the server (the server will forget all session ids, but the browser will still have the sid cookie)
 - The server will check for a valid guess
-  - If the guess is not valid, the server will update the server state for that player and respond with a redirect to the Home Page 
+  - If the guess is not valid, the server will update the server state for that player and respond with a redirect to the Home Page
   - If the guess is valid, the server will update the server state for that player and respond with a redirect to the Home Page
-  - Hint: See "Home Page" for ideas on what details the server state will have to know.  If we had a database much of that information would be there, but because we do not we will simply hold the state data in different objects.  Remember to keep information for different players separate.
+  - Hint: See "Home Page" for ideas on what details the server state will have to know. If we had a database much of that information would be there, but because we do not we will simply hold the state data in different objects. Remember to keep information for different players separate.
 
-The guess is evaluated for how many letters match between the guess and secret word (see "Starting a New Game"), regardless of position of the letters in the word and regardless of the upper/lower case of the letters.  
+The guess is evaluated for how many letters match between the guess and secret word (see "Starting a New Game"), regardless of position of the letters in the word and regardless of the upper/lower case of the letters.
+
 - Hint: This should sound like an earlier assignment
 
 ### Starting a New Game
 
 A new game begins when a user starts a new game or logs in for the first time.
+
 - A secret word is picked at random from the list of available words
   - Hint: see Math.random() at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   - The list of available words is exported by the provided `words.js` file
@@ -93,25 +84,28 @@ A new game begins when a user starts a new game or logs in for the first time.
 If the user is starting a new game by virtue of logging in for the first time, it is done as part of login and does not require extra navigation in the browser
 
 If the user is manually starting a new game, it is done as a POST to `/new-game`
+
 - The server will check for a valid session id
   - If there is not a valid session id, the page will display a message and a login form
     - Hint: an invalid session id could come from manually changing your cookie or restarting the server (the server will forget all session ids, but the browser will still have the sid cookie)
 - If there is a valid session, after updating the state, the response will redirect to the Home Page.
 
 To help with grading, the server will `console.log()` the username and the chosen secret word whenever a new game is started for a player.
-- This is not a debugging console.log().  Be careful to make sure all debugging console.log() statements are removed before turning in your project
+
+- This is not a debugging console.log(). Be careful to make sure all debugging console.log() statements are removed before turning in your project
 
 Important: No information is sent to the browser that allows someone to learn the secret word without playing the game
 
 ### The Login Flow
 
 Login is performed as a POST to `/login`
+
 - It will send only the username, no password
 - If the username is valid the server will respond with a `sid` cookie using a uuid.
   - a "valid username" is one composed only of allowed characters
     - You select the list of valid characters
   - Enforce the validity of the username by having an allowlist of valid characters
-  - explicitly disallow username "dog" 
+  - explicitly disallow username "dog"
     - This simulates a user with a bad password, since we aren't using passwords
   - after setting the cookie header, respond with a redirect to the Home Page
   - a user with a valid username will always be treated as if the are an existing user
@@ -119,6 +113,7 @@ Login is performed as a POST to `/login`
 - If the username is invalid (including "dog"), respond with a login form that contains a message about the username being invalid
 
 If a username that is in the middle of a game logs in
+
 - They will be able to resume their existing game
 - Hint: This means the game info is not tied to their session id, it is tied to their username
   - Hint2: Have one object that connects sessions to usernames, and a second, separate object that connects usernames to game state
@@ -126,6 +121,7 @@ If a username that is in the middle of a game logs in
 ### The Logout Flow
 
 A user logs out with a POST to `/logout`
+
 - Even a user with no session id or an invalid session id can logout
 - This will clear the session id cookie (if any) on the browser
 - This will remove the session information (if any) from the server
@@ -142,27 +138,27 @@ Hint: Be sure to test login/logout, resuming a game already in-progress, and rel
   - spacing, color, and layout of sections should make it readable and presentable as a demonstration of skill
   - In particular, make sure:
     - The list of allowed words is formatted to fit on most screens without scrolling
-    - A user playing the game can understand the information they are presented (such as what guesses have been made and their corresponding) 
+    - A user playing the game can understand the information they are presented (such as what guesses have been made and their corresponding)
 - The game does not need to work on mobile screens, but it should look appropriate at a range of desktop sizes
-- This is not a web design class, so I do not expect art.  However, even fully backend coders must be able to present their work pleasantly.
+- This is not a web design class, so I do not expect art. However, even fully backend coders must be able to present their work pleasantly.
 - **Extra Credit**: Styling and appearance beyond the above minimums that create a pleasant and professional experience
   - use colors, borders, and whitespace to make different areas clear and distinct
   - improve the experience of the game - make it clear and easy to see what has been guessed and what guesses are available
-  - use line-spacing/padding/margins to improve the legibility of text 
+  - use line-spacing/padding/margins to improve the legibility of text
   - Put the app in "context" - as a web application on a page/site
     - You do not need to create any additional pages
 
 ## Implementation Requirements
 
 - Your code should follow the best-practices outlined in class
-- Your work must demonstrate the skills from class.  Simply "working" is insufficient!
-- The game must be runnable via: 
-  - `npm install` 
+- Your work must demonstrate the skills from class. Simply "working" is insufficient!
+- The game must be runnable via:
+  - `npm install`
   - `node server.js`
   - going to `http://localhost:3000`
 - Multiple players must be able to play separate games (from different browsers) simultaneously
 - Logout and a later login must allow you to resume a game
-  - as long as the server has not restarted.  No long-term persistence is expected.
+  - as long as the server has not restarted. No long-term persistence is expected.
 - The server-side MUST enforce security (session and field validity)
   - Do not display to the screen any value that came from user input unless that value was allow-filtered on the server
   - Detect that any insecure values from the user are insecure as soon as possible before they are passed to functions that could store them
@@ -184,7 +180,7 @@ Hint: Be sure to test login/logout, resuming a game already in-progress, and rel
 - Do not have any files in your PR except for the project (no files from other assignments, for example)
 - Use arrays and objects when they each make sense
 - Do not use Map() or Set() for this exam
-  - In order to ensure you can use plain objects and arrays 
+  - In order to ensure you can use plain objects and arrays
   - Map() is not the same as the .map() method on an array - an array .map() is allowed
 - Do not use `var`
 - use `const` and `let` appropriately
@@ -198,4 +194,3 @@ Hint: Be sure to test login/logout, resuming a game already in-progress, and rel
 - Do not use localStorage, sessionStorage, or indexedDB
 - Do not use meta tag refreshes
 - Do not use CSS preprocessors, minifiers, or other tools to modify your CSS
-
