@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #5FD9CD;
+
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+
+#login-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    overflow: auto;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background-color: #D96C75;
+    padding: .25rem 0 .25rem 0;
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-content h1 {
+    margin-left: 1rem;
+    color: #385773;
+    font-style: oblique;
+}
+
+.header-content h1:hover {
+    scale: 1.1;
+    color: #D6F2D5;
+}
+
+.header-content img {
+    border-radius: 50%;
+}
+
+.header-content img:hover {
+    scale: 1.1;
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.error {
+    text-align: center;
+    color: red;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.wrapper {
+    padding: 2rem;
+    background-color: #F2CCB6;
+    max-width: 40rem;
+    border-radius: .5rem;
+    box-shadow: 0 1rem 1.2rem rgb(8, 158, 151);
+}
+
+.login-form {
+    margin-top: 1rem;
+}
+
+.login-content {
+    margin-bottom: 1rem;
+}
+
+.login-label {
+    width: 100%;
+    margin-right: 15px;
+    text-align: end;
+    font-weight: bold;
+}
+
+.login-input {
+    height: 2.5rem;
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-submit {
+    margin: .5rem;
+    padding: .5rem;
+    background-color: #385773;
+    border-radius: .5rem;
+
+    width: 100%;
+    max-width: 20rem;
+
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.login-submit:hover {
+    background-color: #D6F2D5;
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #D96C75;
+    padding: .25rem 0 .25rem 0;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+@media (min-width : 40rem) {
+    .header-content {
+        flex-direction: row;
+    }
+
+    .login-form {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 2rem;
+    }
+
+    .login-content {
+        grid-column: span 12;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .button-container {
+        grid-column: span 12;
+    }
+}

@@ -1,0 +1,275 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #5FD9CD;
+
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+
+#game-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    overflow: auto;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background-color: #D96C75;
+    padding: .25rem 0 .25rem 0;
+    text-align: center;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.header-content h1{
+    margin-left: 1rem;
+    color: #385773;
+    font-style: oblique;
+}
+
+.header-content h1:hover {
+    scale: 1.1;
+    color: #D6F2D5;
+}
+.header-content img {
+    border-radius: 50%;
+}
+.header-content img:hover{
+    scale: 1.1;
+}
+
+.game-btn {
+    margin: 0.5rem;
+    padding: 0.25rem;
+    background-color: #385773;
+    border-radius: 0.5rem;
+
+    width: 100%;
+    max-width: 10rem;
+
+    cursor: pointer;
+    color: #D6F2D5;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.game-btn:hover{
+    background-color: #D6F2D5;
+    color: #333;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: 1fr auto 1fr auto;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.main-title {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.status-msg {
+    display: inline-block;
+    padding: .25rem;
+    color: #D96C75;
+    background-color: #D6F2D5;
+    box-shadow: 0 .5rem 1rem #D96C75;
+}
+
+.count-status {
+    color: #385773;
+}
+
+.word-list-container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+}
+
+.possible-word-container{
+    grid-column: span 12;
+    padding: 1rem;
+    background-color: #F2CCB6;
+    max-height: 50rem;
+    overflow: auto;
+}
+
+.guessed-word-conatiner{
+    display: flex;
+    flex-direction: column;
+
+    grid-column: span 12;
+    padding: 1rem;
+    background-color: #D6F2D5;
+
+    max-height: 50rem;
+    overflow: auto;
+}
+
+.guessed-word-title {
+    display: flex;
+    justify-content: space-around;
+
+    font-weight: 600;
+    font-size: 1.2;
+}
+
+.word-list{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.strike-through {
+    text-decoration: line-through;
+    text-decoration-color: #FF0000;
+    text-decoration-thickness: 2px;
+}
+.word-list li {
+    grid-column: span 3;
+    padding: .25rem;
+}
+
+.guessed-words{
+    list-style-type: none;
+}
+
+.guessed-words-item {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-container {
+    align-self: center;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    background-color: #F2CCB6;
+
+    max-width: 30rem;
+    border-radius: .5rem;
+    box-shadow: 0 1rem 1.2rem rgb(8, 158, 151);
+}
+
+.guess-form {
+    margin-top: 1rem;
+}
+
+.guess-content {
+    margin-bottom: 1rem;
+}
+
+.guess-label {
+    width: 100%;
+    margin-right: 15px;
+    text-align: end;
+    font-weight: bold;
+}
+
+.guess-input {
+    height: 2.5rem;
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.guess-btn {
+    margin: .5rem;
+    padding: .5rem;
+    background-color: #385773;
+    border-radius: .5rem;
+
+    width: 100%;
+    max-width: 15rem;
+
+    cursor: pointer;
+    color: #D6F2D5;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.guess-btn:hover {
+    background-color: #D6F2D5;
+    color: #333;
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #D96C75;
+    padding: .25rem 0 .25rem 0;
+
+    text-align: center;
+    font-size: .8rem;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+@media (min-width: 50rem) {
+    .header-container {
+        flex-direction: row;
+    }
+
+    .header-content {
+        flex-direction: row;
+    }
+
+    .possible-word-container{
+        grid-column: span 6;
+    }
+    
+    .guessed-word-conatiner{
+        grid-column: span 6;
+    }
+
+    .word-list li {
+        grid-column: span 2;
+        padding: .25rem;
+    }
+
+    .guess-form {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .guess-content {
+        grid-column: span 12;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .button-container {
+        grid-column: span 12;
+    }
+}
