@@ -1,13 +1,10 @@
-# INFO6250 Project1 - Server-side Dynamic Site
+# Server-side Dynamic Site
 
 ## Goals
 
-- You will build a web-based word guessing game
+- Build a web-based word guessing game
   - this site will use only backend-generated HTML
   - this site will use no front-end JS
-- You will demonstrate the skills taught in class
-- Extra Credit: You have visuals and styling beyond the minimum required
-
 ## Functional Requirements
 
 For all the below:
@@ -112,85 +109,5 @@ Login is performed as a POST to `/login`
     - There is no user registration
 - If the username is invalid (including "dog"), respond with a login form that contains a message about the username being invalid
 
-If a username that is in the middle of a game logs in
 
-- They will be able to resume their existing game
-- Hint: This means the game info is not tied to their session id, it is tied to their username
-  - Hint2: Have one object that connects sessions to usernames, and a second, separate object that connects usernames to game state
 
-### The Logout Flow
-
-A user logs out with a POST to `/logout`
-
-- Even a user with no session id or an invalid session id can logout
-- This will clear the session id cookie (if any) on the browser
-- This will remove the session information (if any) from the server
-  - Hint `delete obj["key"]` will remove the "key" property from object "obj"
-- Logout does NOT clear the game information from the server
-  - The user can log in as the same username and resume the game
-- After the logout process the server will respond with a redirect to the Home Page
-
-Hint: Be sure to test login/logout, resuming a game already in-progress, and related requirements!
-
-## Visual Requirements
-
-- The game requires some effort to visually present the data and forms
-  - spacing, color, and layout of sections should make it readable and presentable as a demonstration of skill
-  - In particular, make sure:
-    - The list of allowed words is formatted to fit on most screens without scrolling
-    - A user playing the game can understand the information they are presented (such as what guesses have been made and their corresponding)
-- The game does not need to work on mobile screens, but it should look appropriate at a range of desktop sizes
-- This is not a web design class, so I do not expect art. However, even fully backend coders must be able to present their work pleasantly.
-- **Extra Credit**: Styling and appearance beyond the above minimums that create a pleasant and professional experience
-  - use colors, borders, and whitespace to make different areas clear and distinct
-  - improve the experience of the game - make it clear and easy to see what has been guessed and what guesses are available
-  - use line-spacing/padding/margins to improve the legibility of text
-  - Put the app in "context" - as a web application on a page/site
-    - You do not need to create any additional pages
-
-## Implementation Requirements
-
-- Your code should follow the best-practices outlined in class
-- Your work must demonstrate the skills from class. Simply "working" is insufficient!
-- The game must be runnable via:
-  - `npm install`
-  - `node server.js`
-  - going to `http://localhost:3000`
-- Multiple players must be able to play separate games (from different browsers) simultaneously
-- Logout and a later login must allow you to resume a game
-  - as long as the server has not restarted. No long-term persistence is expected.
-- The server-side MUST enforce security (session and field validity)
-  - Do not display to the screen any value that came from user input unless that value was allow-filtered on the server
-  - Detect that any insecure values from the user are insecure as soon as possible before they are passed to functions that could store them
-- You may reuse files or parts of files from previous assignments or classes - but they will be graded by the criteria here!
-- You may create your HTML as you see fit, but it must be fundamentally semantically valid and other best practices from class
-- You may create the CSS as you see fit but you must follow the best practices given in class and obey any restrictions listed here
-- You may add icons and background images but there is no requirement to do so
-  - So long as any icons are done without outside JS or CSS
-- You should use `express`, `cookie-parser`, and `uuid` modules only
-- Do not use external JS other than the above
-  - Built in options like Math are not external libraries and are allowed
-- You must add additional JS files (server-side ONLY) that YOU write to uphold the idea of separation of concerns
-- You must use the correct HTTP methods (GET for loading pages, POST for adding content)
-- Reloading a page should not trigger a POST (use a redirect)
-  - Except for any listed cases with invalid sessions
-- Do not use external CSS libraries
-- You may not use CSS floats to do more than manage flowing text with images
-- You may not use HTML tables or CSS table layouts
-- Do not have any files in your PR except for the project (no files from other assignments, for example)
-- Use arrays and objects when they each make sense
-- Do not use Map() or Set() for this exam
-  - In order to ensure you can use plain objects and arrays
-  - Map() is not the same as the .map() method on an array - an array .map() is allowed
-- Do not use `var`
-- use `const` and `let` appropriately
-- Do not use `alert`, `prompt`, or other blocking JS prompts
-- Do not use poor variable and function names
-- Do not have functions that are too big/do too much
-- Do not have console.log messages from debugging
-  - The console.log to show the secret word is allowed and required
-- Do not have commented out code
-  - Useful comments as discussed in class are welcome though
-- Do not use localStorage, sessionStorage, or indexedDB
-- Do not use meta tag refreshes
-- Do not use CSS preprocessors, minifiers, or other tools to modify your CSS
