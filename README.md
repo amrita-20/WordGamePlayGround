@@ -3,8 +3,8 @@
 ## Goals
 
 - Build a web-based word guessing game
-  - this site will use only backend-generated HTML
-  - this site will use no front-end JS
+  - this site use only backend-generated HTML
+  - this site use no front-end JS
 ## Functional Requirements
 
 For all the below:
